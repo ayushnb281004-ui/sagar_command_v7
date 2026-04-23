@@ -81,19 +81,16 @@ with colB:
     cardinal = get_cardinal_direction(heading)
     st.info(f"**🧭 Current Magnetic Heading:** {heading}° ({cardinal})")
     
-    # 📍 EXAM DEMO MODE MAP
-    # Ensure these are pure numbers with NO quotes and NO commas at the end
-    COLLEGE_LAT = 19.0430
-    COLLEGE_LON = 72.0230 
+    with colB:
+    st.subheader("🛰️ GPS Tracking (EXAM DEMO MODE)")
     
-    # Force the values to be floats to prevent Streamlit rendering errors
-    map_df = pd.DataFrame({
-        'lat': [float(COLLEGE_LAT)], 
-        'lon': [float(COLLEGE_LON)]
-    })
+    # 📍 COORDINATES LOCKED FOR PRESENTATION
+    COLLEGE_LAT = 19.0732  
+    COLLEGE_LON = 72.8542  
     
-    # Render map without the zoom parameter to force auto-centering
-    st.map(map_df, use_container_width=True)
+    map_df = pd.DataFrame({'lat': [COLLEGE_LAT], 'lon': [COLLEGE_LON]})
+    
+    st.map(map_df, zoom=16, use_container_width=True)
     st.success("🛰️ GPS Lock Secured: Coordinates Locked to Campus (Simulation)")
 
 
