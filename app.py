@@ -91,4 +91,4 @@ with colB:
     map_df = pd.DataFrame({'lat': [COLLEGE_LAT], 'lon': [COLLEGE_LON]})
     
     st.map(map_df, zoom=16, use_container_width=True)
-    st.success("🛰️ GPS Lock Secured: Coordinates Locked to Campus (Simulation)")
+    st.success("🛰️ GPS Lock Secured")
