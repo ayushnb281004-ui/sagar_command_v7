@@ -72,18 +72,28 @@ with colA:
     st.markdown("<br>", unsafe_allow_html=True)
     if st.button("🤖 INITIATE AUTO SWEEP", use_container_width=True): send_command("AUTO")
 
+# --- SATELLITE NAVIGATION MAP (DEMO MODE) ---
 with colB:
     st.subheader("🛰️ Navigation & GPS Tracking")
     
-    # 🧭 NEW COMPASS DISPLAY
+    # 🧭 COMPASS DISPLAY
     heading = sensors.get('compass_heading', 0)
     cardinal = get_cardinal_direction(heading)
     st.info(f"**🧭 Current Magnetic Heading:** {heading}° ({cardinal})")
     
     # 📍 EXAM DEMO MODE MAP
+    # Ensure these are pure numbers with NO quotes and NO commas at the end
     COLLEGE_LAT = 19.0430
-    COLLEGE_LON = 72.0230
-    map_df = pd.DataFrame({'lat': [COLLEGE_LAT], 'lon': [COLLEGE_LON]})
+    COLLEGE_LON = 72.0230 
     
-    st.map(map_df, zoom=16, use_container_width=True)
-    st.success("🛰️ GPS Lock Secured")
+    # Force the values to be floats to prevent Streamlit rendering errors
+    map_df = pd.DataFrame({
+        'lat': [float(COLLEGE_LAT)], 
+        'lon': [float(COLLEGE_LON)]
+    })
+    
+    # Render map without the zoom parameter to force auto-centering
+    st.map(map_df, use_container_width=True)
+    st.success("🛰️ GPS Lock Secured: Coordinates Locked to Campus (Simulation)")
+
+
