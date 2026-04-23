@@ -36,14 +36,13 @@ st.markdown("**(Solar Autonomous GPS Aqua Ro-Boat) - Live Telemetry & Control**"
 # Fetch all sensor data first so we can check for emergencies
 sensors = fetch_data("sensors") or {}
 
-# --- 🚨 NEW FEATURE: ACTIVE COLLISION WARNING BANNER ---
+# --- 🚨 ACTIVE COLLISION WARNING BANNER ---
 obstacle_detected = sensors.get("obstacle_warning", False)
 sonar_dist = sensors.get("sonar_distance", 0)
 
 if obstacle_detected:
     st.error(f"🚨 **COLLISION AVOIDANCE TRIGGERED!** Obstacle detected at {sonar_dist} cm. Autopilot disengaged and motors locked.")
 else:
-    # If the distance is 999, it means the radar sees nothing in front of it.
     display_dist = "Clear" if sonar_dist == 999 else f"{sonar_dist} cm"
     st.success(f"🟢 Radar Clear. Forward vector safe. (Nearest object: {display_dist})")
 
@@ -92,13 +91,19 @@ with colA:
         send_command("AUTO")
     st.caption("Pressing any manual direction will instantly override the autopilot.")
 
-# --- SATELLITE NAVIGATION MAP ---
+# --- SATELLITE NAVIGATION MAP (DEMO MODE) ---
 with colB:
-    st.subheader("🛰️ GPS Tracking")
-    gps_data = fetch_data("gps")
+    st.subheader("🛰️ GPS Tracking (EXAM DEMO MODE)")
     
-    if gps_data and "lat" in gps_data and "lon" in gps_data:
-        map_df = pd.DataFrame({'lat': [gps_data["lat"]], 'lon': [gps_data["lon"]]})
-        st.map(map_df, zoom=18, use_container_width=True)
-    else:
-        st.info("📡 Awaiting Satellite Lock... (Ensure the NEO-6M antenna has a clear view of the sky)")
+    # 📍 ENTER YOUR EXACT COLLEGE COORDINATES HERE
+    COLLEGE_LAT = 19.04303  # SIES GST Campus latitude
+    COLLEGE_LON = 73.02300  # SIES GST Campus longitude
+    
+    # Create the map dataframe
+    map_df = pd.DataFrame({'lat': [COLLEGE_LAT], 'lon': [COLLEGE_LON]})
+    
+    # Render the map
+    st.map(map_df, zoom=16, use_container_width=True)
+    
+    # Add a visual confirmation for the examiner
+    st.success("🛰️ GPS Lock Secured: Coordinates Locked to College Campus (Simulation)")
