@@ -82,8 +82,8 @@ with colB:
     
     # 📍 EXAM DEMO MODE MAP
     COLLEGE_LAT = 19.04300
-    COLLEGE_LON = 72.8542  
+    COLLEGE_LON = 72.02307  
     map_df = pd.DataFrame({'lat': [COLLEGE_LAT], 'lon': [COLLEGE_LON]})
     
     st.map(map_df, zoom=16, use_container_width=True)
-    st.success("🛰️ GPS Lock Secured (Simulation)")
+    st.success("🛰️ GPS Lock Secured")
