@@ -83,8 +83,8 @@ with colB:
     
     # 📍 EXAM DEMO MODE MAP
     # Ensure these are pure numbers with NO quotes and NO commas at the end
-    COLLEGE_LAT = 19.0732  
-    COLLEGE_LON = 72.8542  
+    COLLEGE_LAT = 19.0430  
+    COLLEGE_LON = 73.0230  
     
     # Force the values to be floats to prevent Streamlit rendering errors
     map_df = pd.DataFrame({
