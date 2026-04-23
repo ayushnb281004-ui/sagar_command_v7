@@ -82,7 +82,7 @@ with colB:
     
     # 📍 EXAM DEMO MODE MAP
     COLLEGE_LAT = 19.0430
-    COLLEGE_LON = 72.02307  
+    COLLEGE_LON = 72.0230
     map_df = pd.DataFrame({'lat': [COLLEGE_LAT], 'lon': [COLLEGE_LON]})
     
     st.map(map_df, zoom=16, use_container_width=True)
