@@ -93,7 +93,7 @@ with colA:
 
 # --- SATELLITE NAVIGATION MAP (DEMO MODE) ---
 with colB:
-    st.subheader("🛰️ GPS Tracking (EXAM DEMO MODE)")
+    st.subheader("🛰️ GPS Tracking for Navigation")
     
     # 📍 ENTER YOUR EXACT COLLEGE COORDINATES HERE
     COLLEGE_LAT = 19.04303  # SIES GST Campus latitude
