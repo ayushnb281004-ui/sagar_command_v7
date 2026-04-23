@@ -106,4 +106,4 @@ with colB:
     st.map(map_df, zoom=16, use_container_width=True)
     
     # Add a visual confirmation for the examiner
-    st.success("🛰️ GPS Lock Secured: Coordinates Locked to College Campus (Simulation)")
+    st.success("🛰️ GPS Lock Secured")
