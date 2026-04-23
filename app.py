@@ -81,7 +81,7 @@ with colA:
 
 # --- SATELLITE NAVIGATION MAP (DEMO MODE) ---
 with colB:
-    st.subheader("🛰️ GPS Tracking (EXAM DEMO MODE)")
+    st.subheader("🛰️ GPS Tracking")
     
     # 📍 COORDINATES LOCKED FOR PRESENTATION
     COLLEGE_LAT = 19.0732  
