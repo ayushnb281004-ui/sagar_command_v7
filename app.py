@@ -2,15 +2,15 @@ import streamlit as st
 import requests
 import pandas as pd
 
-# ==========================================
-# ⚙️ SYSTEM CONFIGURATION
-# ==========================================
 st.set_page_config(page_title="S.A.G.A.R. HUD", layout="wide", page_icon="🛥️")
 FIREBASE_BASE = "https://sagar-cloud-default-rtdb.firebaseio.com"
 
-# ==========================================
-# 📡 CLOUD COMMUNICATION
-# ==========================================
+# --- HELPER FUNCTION FOR COMPASS DECODING ---
+def get_cardinal_direction(degree):
+    dirs = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"]
+    ix = int((degree + 22.5) / 45) % 8
+    return dirs[ix]
+
 def fetch_data(folder_path):
     try:
         response = requests.get(f"{FIREBASE_BASE}/{folder_path}.json")
@@ -27,9 +27,6 @@ def send_command(direction):
     except Exception as e:
         st.error("Failed to send command.")
 
-# ==========================================
-# 🚀 TACTICAL HUD LAYOUT
-# ==========================================
 st.title("🌊 S.A.G.A.R. Orbital Command Center")
 st.markdown("**(Solar Autonomous GPS Aqua Ro-Boat) - Live Telemetry & Control**")
 st.divider()
@@ -37,11 +34,9 @@ st.divider()
 sensors = fetch_data("sensors") or {}
 
 # ------------------------------------------
-# ROW 1: ENVIRONMENTAL PAYLOAD (SENSORS)
+# ROW 1: ENVIRONMENTAL PAYLOAD
 # ------------------------------------------
 st.subheader("📊 Live Payload Analytics")
-
-# 💦 Restored to 4 columns to include Humidity
 col1, col2, col3, col4 = st.columns(4)
 col1.metric("🧪 pH Level", f"{sensors.get('pH_level', 0.0):.2f}", delta_color="off")
 col2.metric("💧 Turbidity", f"{sensors.get('turbidity_percent', 0)}%")
@@ -55,7 +50,6 @@ st.divider()
 # ------------------------------------------
 colA, colB = st.columns([1, 2])
 
-# --- PROPULSION D-PAD & AUTO ---
 with colA:
     st.subheader("🕹️ Teleoperation & Auto")
     
@@ -76,18 +70,19 @@ with colA:
         if st.button("⬇️ REV", use_container_width=True): send_command("REV")
     
     st.markdown("<br>", unsafe_allow_html=True)
-    if st.button("🤖 INITIATE AUTO SWEEP (Serpentine)", use_container_width=True):
-        send_command("AUTO")
-    st.caption("Pressing any manual direction will instantly override the autopilot.")
+    if st.button("🤖 INITIATE AUTO SWEEP", use_container_width=True): send_command("AUTO")
 
-# --- SATELLITE NAVIGATION MAP (DEMO MODE) ---
 with colB:
-    st.subheader("🛰️ GPS Tracking")
+    st.subheader("🛰️ Navigation & GPS Tracking")
     
-    # 📍 COORDINATES LOCKED FOR PRESENTATION
-    COLLEGE_LAT = 19.04304
-    COLLEGE_LON = 73.02297  
+    # 🧭 NEW COMPASS DISPLAY
+    heading = sensors.get('compass_heading', 0)
+    cardinal = get_cardinal_direction(heading)
+    st.info(f"**🧭 Current Magnetic Heading:** {heading}° ({cardinal})")
     
+    # 📍 EXAM DEMO MODE MAP
+   COLLEGE_LAT = 19.04304
+   COLLEGE_LON = 73.02297 
     map_df = pd.DataFrame({'lat': [COLLEGE_LAT], 'lon': [COLLEGE_LON]})
     
     st.map(map_df, zoom=16, use_container_width=True)
