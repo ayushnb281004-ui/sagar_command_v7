@@ -81,7 +81,7 @@ with colB:
     st.info(f"**🧭 Current Magnetic Heading:** {heading}° ({cardinal})")
     
     # 📍 EXAM DEMO MODE MAP
-    COLLEGE_LAT = 19.04300
+    COLLEGE_LAT = 19.0430
     COLLEGE_LON = 72.02307  
     map_df = pd.DataFrame({'lat': [COLLEGE_LAT], 'lon': [COLLEGE_LON]})
     
