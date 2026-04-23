@@ -41,11 +41,12 @@ sensors = fetch_data("sensors") or {}
 # ------------------------------------------
 st.subheader("📊 Live Payload Analytics")
 
-# Changed to 3 columns since Sonar is removed
-col1, col2, col3 = st.columns(3)
+# 💦 Restored to 4 columns to include Humidity
+col1, col2, col3, col4 = st.columns(4)
 col1.metric("🧪 pH Level", f"{sensors.get('pH_level', 0.0):.2f}", delta_color="off")
 col2.metric("💧 Turbidity", f"{sensors.get('turbidity_percent', 0)}%")
 col3.metric("🌡️ Air Temp", f"{sensors.get('temperature', 0.0)} °C")
+col4.metric("💦 Humidity", f"{sensors.get('humidity', 0.0)}%")
 
 st.divider()
 
@@ -84,10 +85,10 @@ with colB:
     st.subheader("🛰️ GPS Tracking")
     
     # 📍 COORDINATES LOCKED FOR PRESENTATION
-    COLLEGE_LAT = 19.0732  
-    COLLEGE_LON = 72.8542  
+    COLLEGE_LAT = 19.04304
+    COLLEGE_LON = 73.02297  
     
     map_df = pd.DataFrame({'lat': [COLLEGE_LAT], 'lon': [COLLEGE_LON]})
     
     st.map(map_df, zoom=16, use_container_width=True)
-    st.success("🛰️ GPS Lock Secured")
+    st.success("🛰️ GPS Lock Secured: Coordinates Locked to Campus (Simulation)")
