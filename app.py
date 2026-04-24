@@ -155,16 +155,16 @@ with colA:
     pad1, pad2, pad3 = st.columns(3)
     with pad2:
         if st.button("⬆️ FWD", use_container_width=True): send_command("FWD")
-            
-pad4, pad5, pad6 = st.columns(3)
+    
+    pad4, pad5, pad6 = st.columns(3)
     with pad4:
         if st.button("⬅️ LEFT", use_container_width=True): send_command("LEFT")
     with pad5:
         if st.button("🛑 STOP", type="primary", use_container_width=True): send_command("STOP")
     with pad6:
         if st.button("➡️ RIGHT", use_container_width=True): send_command("RIGHT")
-            
-pad7, pad8, pad9 = st.columns(3)
+    
+    pad7, pad8, pad9 = st.columns(3)
     with pad8:
         if st.button("⬇️ REV", use_container_width=True): send_command("REV")
     
