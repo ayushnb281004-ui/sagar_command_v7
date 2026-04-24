@@ -5,6 +5,105 @@ import pandas as pd
 st.set_page_config(page_title="S.A.G.A.R. HUD", layout="wide", page_icon="🛥️")
 FIREBASE_BASE = "https://sagar-cloud-default-rtdb.firebaseio.com"
 
+# --- CUSTOM THEME STYLING ---
+st.markdown("""
+    <style>
+    /* Ocean/Naval Theme Background */
+    [data-testid="stAppViewContainer"] {
+        background: linear-gradient(135deg, #0a1e3e 0%, #1a3a52 50%, #0d2636 100%);
+        color: #e0e8f0;
+    }
+    
+    /* Main content area */
+    [data-testid="stMainBlockContainer"] {
+        background: rgba(10, 30, 62, 0.85);
+    }
+    
+    /* Headers and text */
+    h1, h2, h3 {
+        color: #00d4ff !important;
+        text-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+        font-weight: 700;
+    }
+    
+    p, span, label {
+        color: #b0c4de !important;
+    }
+    
+    /* Dividers */
+    hr {
+        border-color: #00d4ff !important;
+        opacity: 0.5;
+    }
+    
+    /* Buttons */
+    button[kind="primary"], button[kind="secondary"] {
+        background: linear-gradient(135deg, #0088cc, #00bfff) !important;
+        color: white !important;
+        border: 1px solid #00d4ff !important;
+        box-shadow: 0 0 10px rgba(0, 212, 255, 0.3) !important;
+    }
+    
+    button[kind="primary"]:hover, button[kind="secondary"]:hover {
+        background: linear-gradient(135deg, #005a8d, #0099cc) !important;
+        box-shadow: 0 0 20px rgba(0, 212, 255, 0.6) !important;
+    }
+    
+    /* Metric cards */
+    [data-testid="metric-container"] {
+        background: linear-gradient(135deg, rgba(0, 136, 204, 0.15), rgba(0, 191, 255, 0.1)) !important;
+        border: 1px solid rgba(0, 212, 255, 0.3) !important;
+        border-radius: 10px;
+        padding: 15px;
+        box-shadow: inset 0 0 10px rgba(0, 212, 255, 0.1);
+    }
+    
+    /* Info/Success/Error boxes */
+    .stAlert {
+        background: linear-gradient(135deg, rgba(0, 136, 204, 0.2), rgba(0, 191, 255, 0.15)) !important;
+        border: 1px solid #00d4ff !important;
+        color: #b0c4de !important;
+    }
+    
+    .stAlert > div:first-child {
+        color: #00d4ff !important;
+    }
+    
+    /* Columns and containers */
+    [data-testid="column"] {
+        background: rgba(26, 58, 82, 0.4);
+        border-radius: 8px;
+        padding: 10px;
+    }
+    
+    /* Input fields */
+    input, textarea, select {
+        background: rgba(10, 30, 62, 0.6) !important;
+        color: #b0c4de !important;
+        border: 1px solid #00d4ff !important;
+        border-radius: 5px;
+    }
+    
+    /* Scrollbar styling */
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+    
+    ::-webkit-scrollbar-track {
+        background: rgba(10, 30, 62, 0.5);
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: #00d4ff;
+        border-radius: 5px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+        background: #00a8cc;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
 # --- HELPER FUNCTION FOR COMPASS DECODING ---
 def get_cardinal_direction(degree):
     dirs = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"]
@@ -57,7 +156,7 @@ with colA:
     with pad2:
         if st.button("⬆️ FWD", use_container_width=True): send_command("FWD")
             
-    pad4, pad5, pad6 = st.columns(3)
+pad4, pad5, pad6 = st.columns(3)
     with pad4:
         if st.button("⬅️ LEFT", use_container_width=True): send_command("LEFT")
     with pad5:
@@ -65,7 +164,7 @@ with colA:
     with pad6:
         if st.button("➡️ RIGHT", use_container_width=True): send_command("RIGHT")
             
-    pad7, pad8, pad9 = st.columns(3)
+pad7, pad8, pad9 = st.columns(3)
     with pad8:
         if st.button("⬇️ REV", use_container_width=True): send_command("REV")
     
@@ -95,5 +194,3 @@ with colB:
     # Render map without the zoom parameter to force auto-centering
     st.map(map_df, use_container_width=True)
     st.success("🛰️ GPS Lock Secured: Coordinates Locked to Campus (Simulation)")
-
-
